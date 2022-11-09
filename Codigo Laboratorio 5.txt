@@ -1,3 +1,12 @@
+;
+; Numeros Matriz led.asm
+;
+; Created: 2/11/2022 6:57:41 p. m.
+; Author : perez
+;
+
+
+; Replace with your application code
 .def temp = r21
 start:	
 
@@ -17,6 +26,8 @@ reset:
 	in r20, pinc
 	cpi r20, 1
 	breq suma
+	cpi r20, 2
+	breq resta
 	cpi r17, 0
 	breq ceroe
 	cpi r17, 1
@@ -45,6 +56,18 @@ suma:
 	brne suma	
 	inc r17	
 	rjmp reset
+resta:
+	wdr
+	in r16, pinc
+	cpi r16,0	
+	brne resta
+	cpi r17, 0
+	breq r	
+	dec r17	
+	rjmp reset
+r:
+	ldi r17, 10
+	rjmp resta
 ceroe:
 	call cero
 	rjmp reset
